@@ -1,0 +1,219 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: #ffffff;
+  color: #111;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container {
+  text-align: center;
+  max-width: 720px;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0 0 0.25rem 0;
+}
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 0 0 1.25rem 0;
+  color: #333;
+}
+
+.music-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(229, 46, 113, 0.18);
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.music-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(229, 46, 113, 0.2);
+}
+
+.music-button:active {
+  transform: translateY(0);
+}
+
+.result {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  color: #222;
+  min-height: 1.6rem;
+}
+
+img {
+    width: 500px;
+    height: 500px;
+}
+
+
+.music-player {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+/* 曲名のスタイル */
+.music-player .result:first-child {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+/* アルバムアート画像 */
+.music-player img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 正方形を維持 */
+  object-fit: cover;
+  border-radius: 15px; /* 画像も角丸に */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* ジャケットの立体感 */
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* ホバー時に少し浮く演出 */
+.music-player a:hover img {
+  transform: scale(1.02);
+}
+
+/* 今日の君は???度MAX!! の部分 */
+.music-player .result:last-child {
+  font-size: 2rem;
+  color: #222;
+  margin-top: 10px;
+}
+
+.play-icon {
+  color: white;
+  font-size: 24px;
+  margin-left: 4px; /* ▶は少し左に寄って見えるので調整 */
+}
+
+.album-link {
+  display: inline-block; /* 画像サイズに合わせる */
+  position: relative; /* 子要素の基準点にする */
+  border-radius: 15px; /* 画像の角丸に合わせる */
+  overflow: hidden; /* 角丸からはみ出た部分を隠す */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 影はここに移動 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 元のimgタグのスタイルを少し調整 */
+.music-player img {
+  /* box-shadowとborder-radiusは親の.album-linkに移したので削除または上書き */
+  box-shadow: none;
+  border-radius: 0;
+  display: block; /* 隙間をなくす */
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+/* 画像を包むラッパー（ここを基準にする） */
+.image-wrapper {
+  position: relative;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 完全に中央に配置 */
+  width: 60px; /* ボタンの大きさ */
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
+  border-radius: 50%; /* 丸くする */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8; /* 通常時の透明度 */
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.8); /* 白い枠線を追加してリッチに */
+}
+
+/* ルーレット回転中の画像アニメーション */
+.roulette-img {
+  animation: flashFade 0.2s infinite alternate; /* 0.2秒間隔で点滅を繰り返す */
+  opacity: 0.7;
+}
+
+/* 点滅アニメーションの定義 */
+@keyframes flashFade {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.genre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ジャンルボタンのスタイル */
+.genre-btn {
+  padding: 8px 15px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+/* 選択中のボタンを目立たせる */
+.genre-btn.active {
+  background-color: #ffcc00; /* 好きな色に */
+  font-weight: bold;
+  border-color: #ff9900;
+}
+
+/* ジャンルボタン個別の装飾 */
+.genre-grid button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* ホバー時の見た目（お好みで） */
+.genre-grid button:hover {
+  background-color: #f0f0f0;
+}
