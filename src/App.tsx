@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import "./App.css";
 import { allList, emotions, type Music } from "./components/data";
 import { ActionArea } from "./components/ActionAre";
-import { MusicCard } from "./components/Musiccard";
+import { MusicCard } from "./components/MusicCard";
+
 
 
 
